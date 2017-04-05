@@ -8,9 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		A173AF0A1E930BA400E8C508 /* SVNCamera.h in Headers */ = {isa = PBXBuildFile; fileRef = A173AF081E930BA400E8C508 /* SVNCamera.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A1D72EE51E95B22C0029E73C /* SVNShapesManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1D72EE41E95B22C0029E73C /* SVNShapesManager.framework */; };
 		A1D72EE81E95B29F0029E73C /* SVNCameraVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D72EE71E95B29F0029E73C /* SVNCameraVC.swift */; };
 		A1D72EEE1E95B4F50029E73C /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1D72EED1E95B4F50029E73C /* AVFoundation.framework */; };
+		A1D72EEF1E95B9330029E73C /* SVNShapesManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1D72EE41E95B22C0029E73C /* SVNShapesManager.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,8 +27,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A1D72EEF1E95B9330029E73C /* SVNShapesManager.framework in Frameworks */,
 				A1D72EEE1E95B4F50029E73C /* AVFoundation.framework in Frameworks */,
-				A1D72EE51E95B22C0029E73C /* SVNShapesManager.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -93,7 +93,6 @@
 				A173AF011E930BA400E8C508 /* Frameworks */,
 				A173AF021E930BA400E8C508 /* Headers */,
 				A173AF031E930BA400E8C508 /* Resources */,
-				A1D72EE61E95B2330029E73C /* Carthage */,
 			);
 			buildRules = (
 			);
@@ -147,24 +146,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		A1D72EE61E95B2330029E73C /* Carthage */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/SVNShapesManager.framework",
-			);
-			name = Carthage;
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		A173AF001E930BA400E8C508 /* Sources */ = {
@@ -289,7 +270,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(SRCROOT)/Carthage/Build/iOS/**",
 				);
 				INFOPLIST_FILE = SVNCamera/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -315,7 +296,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(SRCROOT)/Carthage/Build/iOS/**",
 				);
 				INFOPLIST_FILE = SVNCamera/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
