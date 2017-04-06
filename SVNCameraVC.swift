@@ -1,4 +1,13 @@
 //
+//  SVNCamera.swift
+//  Tester
+//
+//  Created by Aaron Dean Bikis on 4/5/17.
+//  Copyright © 2017 7apps. All rights reserved.
+//
+
+import Foundation
+//
 //  SVNCameraViewController.swift
 //
 //
@@ -11,7 +20,7 @@ import SVNShapesManager
 import AVFoundation
 
 public protocol SVNCameraViewControllerDelegate: class {
-    
+    func shot(anAwesome image: UIImage)
 }
 
 public class SVNCameraViewController: UIViewController, AVCapturePhotoCaptureDelegate{
@@ -53,23 +62,23 @@ public class SVNCameraViewController: UIViewController, AVCapturePhotoCaptureDel
     
     private var leftCircle: SVNShapeMetaData = {
         let shape = SVNShapeMetaData(shapes: nil,
-                                  location: .botMid,
-                                  padding: CGPoint(x: 65.0, y: 25.0),
-                                  size: CGSize(width: 65.0, height: 65.0),
-                                  fill: UIColor.clear.cgColor,
-                                  stroke: UIColor.white.cgColor,
-                                  strokeWidth: 2.5)
+                                     location: .botMid,
+                                     padding: CGPoint(x: 65.0, y: 25.0),
+                                     size: CGSize(width: 65.0, height: 65.0),
+                                     fill: UIColor.clear.cgColor,
+                                     stroke: UIColor.white.cgColor,
+                                     strokeWidth: 2.5)
         return shape
     }()
     
     private var rightCircle: SVNShapeMetaData = {
         let shape = SVNShapeMetaData(shapes: nil,
-                                  location: .botMid,
-                                  padding: CGPoint(x: 65.0, y: 25.0),
-                                  size: CGSize(width: 65.0, height: 65.0),
-                                  fill: UIColor.clear.cgColor,
-                                  stroke: UIColor.white.cgColor,
-                                  strokeWidth: 2.5)
+                                     location: .botMid,
+                                     padding: CGPoint(x: 65.0, y: 25.0),
+                                     size: CGSize(width: 65.0, height: 65.0),
+                                     fill: UIColor.clear.cgColor,
+                                     stroke: UIColor.white.cgColor,
+                                     strokeWidth: 2.5)
         return shape
     }()
     
@@ -79,12 +88,12 @@ public class SVNCameraViewController: UIViewController, AVCapturePhotoCaptureDel
     
     private var dismissShape: SVNShapeMetaData = {
         let shape = SVNShapeMetaData(shapes: nil,
-                                  location: .topLeft,
-                                  padding: CGPoint(x: 25.0, y: 25.0),
-                                  size: CGSize(width: 65.0, height: 65.0),
-                                  fill: UIColor.clear.cgColor,
-                                  stroke: UIColor.white.cgColor,
-                                  strokeWidth: 2.5)
+                                     location: .topLeft,
+                                     padding: CGPoint(x: 25.0, y: 25.0),
+                                     size: CGSize(width: 65.0, height: 65.0),
+                                     fill: UIColor.clear.cgColor,
+                                     stroke: UIColor.white.cgColor,
+                                     strokeWidth: 2.5)
         return shape
     }()
     
@@ -97,15 +106,7 @@ public class SVNCameraViewController: UIViewController, AVCapturePhotoCaptureDel
     
     private var stillImageView: UIImageView?
     
-    private var previewImage: UIImage! {
-        didSet {
-            self.stillImageView = UIImageView(image: self.previewImage)
-            self.stillImageView?.contentMode = .scaleAspectFill
-            self.stillImageView?.clipsToBounds = true
-            self.view.addSubview(stillImageView!)
-            self.stillImageView?.frame = self.view.bounds
-        }
-    }
+    private var awesomeImage: UIImage?
     
     
     override public func viewDidLoad() {
@@ -119,18 +120,14 @@ public class SVNCameraViewController: UIViewController, AVCapturePhotoCaptureDel
         self.dismissShape.shapes?.forEach({ self.view.layer.addSublayer($0) })
     }
     
-    public override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.initilizeCaptureSession()
-    }
-    
-    
-    
     private func setInitalLayout(){
         self.leftCircle.shapes = [self.shapeManager.createCircleLayer(with: self.leftCircle)]
         self.rightCircle.shapes = [self.shapeManager.createCircleLayer(with: self.rightCircle)]
         self.view.layer.addSublayer(self.leftCircle.shapes!.first!)
         self.view.layer.addSublayer(self.rightCircle.shapes!.first!)
+        DispatchQueue.main.async {
+            self.initilizeCaptureSession()
+        }
     }
     
     private func refreshView(){
@@ -224,7 +221,9 @@ public class SVNCameraViewController: UIViewController, AVCapturePhotoCaptureDel
     
     
     internal func accept(){
-        self.refreshView()
+        guard let image = awesomeImage else { return }
+        self.delegate.shot(anAwesome: image)
+        self.shouldDismiss()
     }
     
     internal func decline(){
@@ -241,9 +240,13 @@ public class SVNCameraViewController: UIViewController, AVCapturePhotoCaptureDel
         self.captureSession!.sessionPreset = AVCaptureSessionPresetPhoto
         self.stillImageOutput = AVCapturePhotoOutput()
         
-        
         guard let device = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo) else {
             fatalError("Device doesn't have a camera")
+        }
+        //Flush the preview layer
+        if self.previewLayer != nil {
+            self.previewLayer?.removeFromSuperlayer()
+            self.previewLayer = nil
         }
         
         let input = try? AVCaptureDeviceInput(device: device)
@@ -251,9 +254,10 @@ public class SVNCameraViewController: UIViewController, AVCapturePhotoCaptureDel
             self.captureSession!.addInput(input)
             if (self.captureSession!.canAddOutput(stillImageOutput)) {
                 self.captureSession!.addOutput(stillImageOutput)
-                previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
-                previewLayer!.videoGravity = AVLayerVideoGravityResizeAspectFill
-                self.view.layer.addSublayer(previewLayer!)
+                self.previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
+                self.previewLayer!.frame = self.view.bounds
+                self.previewLayer!.videoGravity = AVLayerVideoGravityResizeAspectFill
+                self.view.layer.insertSublayer(previewLayer!, at: 0)
                 captureSession?.startRunning()
             }
         }
@@ -270,8 +274,8 @@ public class SVNCameraViewController: UIViewController, AVCapturePhotoCaptureDel
         
         let dataProvider = CGDataProvider(data: dataImage as CFData)
         let cgImageRef: CGImage! = CGImage(jpegDataProviderSource: dataProvider!, decode: nil, shouldInterpolate: true, intent: .defaultIntent)
-        let image = UIImage(cgImage: cgImageRef, scale: 1.0, orientation: UIImageOrientation.right)
-        self.previewImage = image
+        self.awesomeImage = UIImage(cgImage: cgImageRef, scale: 1.0, orientation: UIImageOrientation.right)
+        self.previewLayer?.contents = awesomeImage
         captureSession?.stopRunning()
     }
 }
