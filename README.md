@@ -29,3 +29,9 @@ $(SRCROOT)/Carthage/Build/iOS/pathToFramework*.framework
 If Xcode has issues finding your framework Add
  $(SRCROOT)/Carthage/Build/iOS
   To 'Framework Search Paths' in Build Settings
+
+#Framework Specific instructions
+Add
+Key       :  Privacy - Camera Usage Description   
+Value     :  $(PRODUCT_NAME) camera use
+to info.plist
