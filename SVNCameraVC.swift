@@ -14,9 +14,9 @@ public protocol SVNCameraViewControllerDelegate: class {
     func cancelWithoutImage()
 }
 
-public class SVNCameraViewController: UIViewController, AVCapturePhotoCaptureDelegate{
+open class SVNCameraViewController: UIViewController, AVCapturePhotoCaptureDelegate{
     
-    public weak var delegate: SVNCameraViewControllerDelegate!
+    open weak var delegate: SVNCameraViewControllerDelegate!
     
     private lazy var dismissButton: UIButton = {
         let button = UIButton()
@@ -108,7 +108,7 @@ public class SVNCameraViewController: UIViewController, AVCapturePhotoCaptureDel
     }
     
     
-    override public func viewDidLoad() {
+    override open func viewDidLoad() {
         super.viewDidLoad()
         self.setInitalLayout()
         //Set things that should only happen once
@@ -227,7 +227,7 @@ public class SVNCameraViewController: UIViewController, AVCapturePhotoCaptureDel
             }
         }
     }
-    public func capture(_ captureOutput: AVCapturePhotoOutput, didFinishProcessingPhotoSampleBuffer photoSampleBuffer: CMSampleBuffer?, previewPhotoSampleBuffer: CMSampleBuffer?, resolvedSettings: AVCaptureResolvedPhotoSettings, bracketSettings: AVCaptureBracketedStillImageSettings?, error: Error?) {
+    open func capture(_ captureOutput: AVCapturePhotoOutput, didFinishProcessingPhotoSampleBuffer photoSampleBuffer: CMSampleBuffer?, previewPhotoSampleBuffer: CMSampleBuffer?, resolvedSettings: AVCaptureResolvedPhotoSettings, bracketSettings: AVCaptureBracketedStillImageSettings?, error: Error?) {
         
         if let error = error {
             print("error capturing image : \(error.localizedDescription)")
