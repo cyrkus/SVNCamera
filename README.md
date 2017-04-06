@@ -16,7 +16,8 @@ Open the Cartfile and add this as a dependency. (in OGDL):
 Update your project to include the framework:
 Carthage update --platform iOS
 
-Add the framework to 'Linked Frameworks and Libraries' in the Xcode Project by dragging and dropping the framework created in
+*IMPORTANT*
+Add the framework to 'Embedded Binaries' in the Xcode Project by dragging and dropping the framework created in
  Carthage/Build/iOS/pathToFramework*.framework
 
 Add this run Script to your xcodeproj
