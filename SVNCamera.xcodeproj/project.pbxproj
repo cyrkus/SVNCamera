@@ -10,14 +10,12 @@
 		A173AF0A1E930BA400E8C508 /* SVNCamera.h in Headers */ = {isa = PBXBuildFile; fileRef = A173AF081E930BA400E8C508 /* SVNCamera.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A1D72EE81E95B29F0029E73C /* SVNCameraVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D72EE71E95B29F0029E73C /* SVNCameraVC.swift */; };
 		A1D72EEE1E95B4F50029E73C /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1D72EED1E95B4F50029E73C /* AVFoundation.framework */; };
-		A1D72EEF1E95B9330029E73C /* SVNShapesManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1D72EE41E95B22C0029E73C /* SVNShapesManager.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		A173AF051E930BA400E8C508 /* SVNCamera.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SVNCamera.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A173AF081E930BA400E8C508 /* SVNCamera.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SVNCamera.h; sourceTree = "<group>"; };
 		A173AF091E930BA400E8C508 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A1D72EE41E95B22C0029E73C /* SVNShapesManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SVNShapesManager.framework; path = Carthage/Build/iOS/SVNShapesManager.framework; sourceTree = "<group>"; };
 		A1D72EE71E95B29F0029E73C /* SVNCameraVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SVNCameraVC.swift; sourceTree = SOURCE_ROOT; };
 		A1D72EED1E95B4F50029E73C /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -27,7 +25,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A1D72EEF1E95B9330029E73C /* SVNShapesManager.framework in Frameworks */,
 				A1D72EEE1E95B4F50029E73C /* AVFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -66,7 +63,6 @@
 			isa = PBXGroup;
 			children = (
 				A1D72EED1E95B4F50029E73C /* AVFoundation.framework */,
-				A1D72EE41E95B22C0029E73C /* SVNShapesManager.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
