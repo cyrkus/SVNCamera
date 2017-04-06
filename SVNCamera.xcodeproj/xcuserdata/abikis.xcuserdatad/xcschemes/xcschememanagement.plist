@@ -4,15 +4,15 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>SVNCamera.xcscheme_^#shared#^_</key>
+		<key>SVNCamera.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>1</integer>
+			<integer>0</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>A173AF041E930BA400E8C508</key>
+		<key>A16C67E61E96CF8500846BAF</key>
 		<dict>
 			<key>primary</key>
 			<true/>
