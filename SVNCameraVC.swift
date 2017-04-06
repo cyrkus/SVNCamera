@@ -11,7 +11,7 @@ import SVNShapesManager
 import AVFoundation
 
 public protocol SVNCameraViewControllerDelegate: class {
-    func cancelWithoutImage()
+    
 }
 
 public class SVNCameraViewController: UIViewController, AVCapturePhotoCaptureDelegate{
@@ -232,7 +232,7 @@ public class SVNCameraViewController: UIViewController, AVCapturePhotoCaptureDel
     }
     
     internal func shouldDismiss(){
-        delegate.cancelWithoutImage()
+        self.dismiss(animated: true, completion: nil)
     }
     
     //MARK: AV Methods
