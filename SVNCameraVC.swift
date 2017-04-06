@@ -117,6 +117,10 @@ public class SVNCameraViewController: UIViewController, AVCapturePhotoCaptureDel
         self.dismissButton.frame = self.shapeManager.fetchRect(with: dismissShape)
         self.dismissShape.shapes = self.shapeManager.createTwoLines(with: self.dismissShape, shapeToCreate: .exit)
         self.dismissShape.shapes?.forEach({ self.view.layer.addSublayer($0) })
+    }
+    
+    public override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         self.initilizeCaptureSession()
     }
     
