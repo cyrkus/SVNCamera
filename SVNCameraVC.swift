@@ -159,16 +159,20 @@ public class SVNCameraViewController: UIViewController, AVCapturePhotoCaptureDel
     
     //MARK: Actions
     internal func tapAction(){
-
+        self.shootPhoto()
+        self.animateShapesForPhoto()
+    }
+    
+    func animateShapesForPhoto(){
         self.shapeManager.animateToOval(with: leftCircle, in: 0.5, withNewLocation: .botLeft) {
             let rect = self.shapeManager.fetchRect(for: .botLeft, with: self.leftCircle.padding, and: self.leftCircle.size)
             self.declineShape = SVNShapeMetaData(shapes: nil,
-                                              location: .botLeft,
-                                              padding: self.leftCircle.padding,
-                                              size: self.leftCircle.size,
-                                              fill: UIColor.clear.cgColor,
-                                              stroke: UIColor.red.cgColor,
-                                              strokeWidth: 2.0)
+                                                 location: .botLeft,
+                                                 padding: self.leftCircle.padding,
+                                                 size: self.leftCircle.size,
+                                                 fill: UIColor.clear.cgColor,
+                                                 stroke: UIColor.red.cgColor,
+                                                 strokeWidth: 2.0)
             self.declineButton.frame = rect
             self.declineShape.shapes = self.shapeManager.createTwoLines(with: self.declineShape, shapeToCreate: .exit)
             self.declineShape.shapes?.forEach({ self.declineButton.layer.addSublayer($0) })
@@ -179,16 +183,39 @@ public class SVNCameraViewController: UIViewController, AVCapturePhotoCaptureDel
             let rect = self.shapeManager.fetchRect(for: .botRight, with: self.rightCircle.padding, and: self.rightCircle.size)
             self.acceptButton.frame = rect
             self.acceptShape = SVNShapeMetaData(shapes: nil,
-                                             location: .botRight,
-                                             padding: self.rightCircle.padding,
-                                             size: self.rightCircle.size,
-                                             fill: UIColor.clear.cgColor,
-                                             stroke: UIColor.green.cgColor,
-                                             strokeWidth: 2.5)
+                                                location: .botRight,
+                                                padding: self.rightCircle.padding,
+                                                size: self.rightCircle.size,
+                                                fill: UIColor.clear.cgColor,
+                                                stroke: UIColor.green.cgColor,
+                                                strokeWidth: 2.5)
             self.acceptShape?.shapes = self.shapeManager.createCheckMark(with: self.acceptShape)
             self.acceptShape.shapes?.forEach({ self.acceptButton.layer.addSublayer($0) })
             self.acceptButton.isEnabled = true
         }
+    }
+    
+    func shootPhoto(){
+        if stillImageView != nil {
+            stillImageView?.removeFromSuperview()
+            stillImageView = nil
+            if captureSession == nil {
+                initilizeCaptureSession()
+                return
+            }
+            captureSession?.startRunning()
+            return
+        }
+        //Is in circle state and we should shoot an image
+        let settings = AVCapturePhotoSettings()
+        let previewPixelType = settings.availablePreviewPhotoPixelFormatTypes.first!
+        let previewFormat = [
+            kCVPixelBufferPixelFormatTypeKey as String: previewPixelType,
+            kCVPixelBufferWidthKey as String: 160,
+            kCVPixelBufferHeightKey as String: 160
+        ]
+        settings.previewPhotoFormat = previewFormat
+        stillImageOutput?.capturePhoto(with: settings, delegate: self)
     }
     
     
