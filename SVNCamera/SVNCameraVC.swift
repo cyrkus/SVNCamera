@@ -6,15 +6,6 @@
 //  Copyright © 2017 7apps. All rights reserved.
 //
 
-import Foundation
-//
-//  SVNCameraViewController.swift
-//
-//
-//  Created by Aaron Dean Bikis on 4/3/17.
-//  Copyright © 2017 7apps. All rights reserved.
-//
-
 import UIKit
 import SVNShapesManager
 import AVFoundation
