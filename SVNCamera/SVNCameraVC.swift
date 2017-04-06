@@ -8,6 +8,7 @@
 
 import UIKit
 import SVNShapesManager
+import SVNTheme
 import AVFoundation
 
 public protocol SVNCameraViewControllerDelegate: class {
@@ -15,6 +16,8 @@ public protocol SVNCameraViewControllerDelegate: class {
 }
 
 public class SVNCameraViewController: UIViewController, AVCapturePhotoCaptureDelegate{
+
+    lazy var theme = SVNTheme_DefaultDark()
     
     public weak var delegate: SVNCameraViewControllerDelegate!
     
@@ -51,24 +54,24 @@ public class SVNCameraViewController: UIViewController, AVCapturePhotoCaptureDel
         return manager
     }()
     
-    private var leftCircle: SVNShapeMetaData = {
+    private lazy var leftCircle: SVNShapeMetaData = {
         let shape = SVNShapeMetaData(shapes: nil,
                                      location: .botMid,
                                      padding: CGPoint(x: 65.0, y: 25.0),
                                      size: CGSize(width: 65.0, height: 65.0),
                                      fill: UIColor.clear.cgColor,
-                                     stroke: UIColor.white.cgColor,
+                                     stroke: self.theme.stanardButtonTintColor.cgColor,
                                      strokeWidth: 2.5)
         return shape
     }()
     
-    private var rightCircle: SVNShapeMetaData = {
+    private lazy var rightCircle: SVNShapeMetaData = {
         let shape = SVNShapeMetaData(shapes: nil,
                                      location: .botMid,
                                      padding: CGPoint(x: 65.0, y: 25.0),
                                      size: CGSize(width: 65.0, height: 65.0),
                                      fill: UIColor.clear.cgColor,
-                                     stroke: UIColor.white.cgColor,
+                                     stroke: self.theme.stanardButtonTintColor.cgColor,
                                      strokeWidth: 2.5)
         return shape
     }()
@@ -77,13 +80,13 @@ public class SVNCameraViewController: UIViewController, AVCapturePhotoCaptureDel
     
     private var declineShape: SVNShapeMetaData!
     
-    private var dismissShape: SVNShapeMetaData = {
+    private lazy var dismissShape: SVNShapeMetaData = {
         let shape = SVNShapeMetaData(shapes: nil,
                                      location: .topLeft,
                                      padding: CGPoint(x: 25.0, y: 50.0),
                                      size: CGSize(width: 65.0, height: 65.0),
                                      fill: UIColor.clear.cgColor,
-                                     stroke: UIColor.white.cgColor,
+                                     stroke: self.theme.stanardButtonTintColor.cgColor,
                                      strokeWidth: 2.5)
         return shape
     }()
@@ -104,6 +107,7 @@ public class SVNCameraViewController: UIViewController, AVCapturePhotoCaptureDel
         super.viewDidLoad()
         self.setInitalLayout()
         //Set things that should only happen once
+        
         self.view.backgroundColor = UIColor.black
         self.actionbutton.frame = self.shapeManager.fetchRect(with: leftCircle)
         self.dismissButton.frame = self.shapeManager.fetchRect(for: .topLeft, with: CGPoint(x: 15, y: 15), and: CGSize(width: 75, height: 75))
@@ -163,7 +167,7 @@ public class SVNCameraViewController: UIViewController, AVCapturePhotoCaptureDel
                                                  padding: self.leftCircle.padding,
                                                  size: self.leftCircle.size,
                                                  fill: UIColor.clear.cgColor,
-                                                 stroke: UIColor.red.cgColor,
+                                                 stroke: self.theme.declineButtonTintColor.cgColor,
                                                  strokeWidth: 2.0)
             self.declineButton.frame = rect
             self.declineShape.shapes = self.shapeManager.createTwoLines(with: self.declineShape, shapeToCreate: .exit)
@@ -179,7 +183,7 @@ public class SVNCameraViewController: UIViewController, AVCapturePhotoCaptureDel
                                                 padding: self.rightCircle.padding,
                                                 size: self.rightCircle.size,
                                                 fill: UIColor.clear.cgColor,
-                                                stroke: UIColor.green.cgColor,
+                                                stroke: self.theme.acceptButtonTintColor.cgColor,
                                                 strokeWidth: 2.5)
             self.acceptShape?.shapes = self.shapeManager.createCheckMark(with: self.acceptShape)
             self.acceptShape.shapes?.forEach({ self.acceptButton.layer.addSublayer($0) })
