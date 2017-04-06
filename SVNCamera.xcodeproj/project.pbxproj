@@ -7,12 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A117999A1E96F69600DC7D70 /* SVNTheme.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A11799991E96F69600DC7D70 /* SVNTheme.framework */; };
 		A16C67EC1E96CF8500846BAF /* SVNCamera.h in Headers */ = {isa = PBXBuildFile; fileRef = A16C67EA1E96CF8500846BAF /* SVNCamera.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A16C67F41E96D00400846BAF /* SVNShapesManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A16C67F31E96D00400846BAF /* SVNShapesManager.framework */; };
 		A16C67F71E96D05000846BAF /* SVNCameraVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A16C67F61E96D05000846BAF /* SVNCameraVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A11799991E96F69600DC7D70 /* SVNTheme.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SVNTheme.framework; path = Carthage/Build/iOS/SVNTheme.framework; sourceTree = "<group>"; };
 		A16C67E71E96CF8500846BAF /* SVNCamera.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SVNCamera.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A16C67EA1E96CF8500846BAF /* SVNCamera.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SVNCamera.h; sourceTree = "<group>"; };
 		A16C67EB1E96CF8500846BAF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -26,6 +28,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A16C67F41E96D00400846BAF /* SVNShapesManager.framework in Frameworks */,
+				A117999A1E96F69600DC7D70 /* SVNTheme.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,6 +66,7 @@
 		A16C67F21E96D00400846BAF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A11799991E96F69600DC7D70 /* SVNTheme.framework */,
 				A16C67F31E96D00400846BAF /* SVNShapesManager.framework */,
 			);
 			name = Frameworks;
@@ -153,6 +157,7 @@
 			);
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/SVNShapesManager.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/SVNTheme.framework",
 			);
 			name = Carthage;
 			outputPaths = (
