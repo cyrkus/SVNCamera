@@ -4,7 +4,16 @@ Submodules include:
 SVNModalViewController
 
 #To Use this framework
-Conform the presenter to SVNCamera's delegate in order to get an image back
+Instantiate SVNViewController with init(:theme, :delegate) or init(nibName: bundleName: theme: delegate:)
+You can pass in your own SVNTheme or an instance of SVNTheme_default ...
+
+If you haven't added camera access request to your info.plist:
+  Add
+
+    Key       :  Privacy - Camera Usage Description   
+    Value     :  $(PRODUCT_NAME) camera use
+    to info.plist
+
 
 ## To install this framework
 Add Carthage files to your .gitignore
@@ -46,9 +55,3 @@ If Xcode has issues finding your framework Add
     $(SRCROOT)/Carthage/Build/iOS
 
 To 'Framework Search Paths' in Build Settings
-
-#Framework Specific instructions
-Add
-Key       :  Privacy - Camera Usage Description   
-Value     :  $(PRODUCT_NAME) camera use
-to info.plist
