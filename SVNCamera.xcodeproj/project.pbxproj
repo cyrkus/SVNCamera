@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		A16C67EC1E96CF8500846BAF /* SVNCamera.h in Headers */ = {isa = PBXBuildFile; fileRef = A16C67EA1E96CF8500846BAF /* SVNCamera.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A16C67F71E96D05000846BAF /* SVNCameraVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A16C67F61E96D05000846BAF /* SVNCameraVC.swift */; };
+		A1862A9D1E9ED2B100C81B1A /* SVNModalViewController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1862A9A1E9ED2B100C81B1A /* SVNModalViewController.framework */; };
+		A1862A9E1E9ED2B100C81B1A /* SVNShapesManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1862A9B1E9ED2B100C81B1A /* SVNShapesManager.framework */; };
+		A1862A9F1E9ED2B100C81B1A /* SVNTheme.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1862A9C1E9ED2B100C81B1A /* SVNTheme.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -16,6 +19,9 @@
 		A16C67EA1E96CF8500846BAF /* SVNCamera.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SVNCamera.h; sourceTree = "<group>"; };
 		A16C67EB1E96CF8500846BAF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A16C67F61E96D05000846BAF /* SVNCameraVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SVNCameraVC.swift; sourceTree = "<group>"; };
+		A1862A9A1E9ED2B100C81B1A /* SVNModalViewController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SVNModalViewController.framework; path = Carthage/Build/iOS/SVNModalViewController.framework; sourceTree = "<group>"; };
+		A1862A9B1E9ED2B100C81B1A /* SVNShapesManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SVNShapesManager.framework; path = Carthage/Build/iOS/SVNShapesManager.framework; sourceTree = "<group>"; };
+		A1862A9C1E9ED2B100C81B1A /* SVNTheme.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SVNTheme.framework; path = Carthage/Build/iOS/SVNTheme.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -23,6 +29,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A1862A9D1E9ED2B100C81B1A /* SVNModalViewController.framework in Frameworks */,
+				A1862A9E1E9ED2B100C81B1A /* SVNShapesManager.framework in Frameworks */,
+				A1862A9F1E9ED2B100C81B1A /* SVNTheme.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -60,6 +69,9 @@
 		A16C67F21E96D00400846BAF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A1862A9A1E9ED2B100C81B1A /* SVNModalViewController.framework */,
+				A1862A9B1E9ED2B100C81B1A /* SVNShapesManager.framework */,
+				A1862A9C1E9ED2B100C81B1A /* SVNTheme.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -149,6 +161,8 @@
 			);
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/SVNModalViewController.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/SVNTheme.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/SVNShapesManager.framework",
 			);
 			name = Carthage;
 			outputPaths = (

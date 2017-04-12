@@ -3,6 +3,8 @@ A generic camera ViewController intended for the SVNAppBuilder project.
 Submodules include:
 SVNModalViewController
 
+#To Use this framework
+Conform the presenter to SVNCamera's delegate in order to get an image back
 
 ## To install this framework
 Add Carthage files to your .gitignore

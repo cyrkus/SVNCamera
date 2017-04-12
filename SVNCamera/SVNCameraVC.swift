@@ -9,24 +9,17 @@
 import UIKit
 import SVNShapesManager
 import SVNTheme
+import SVNModalViewController
 import AVFoundation
 
 public protocol SVNCameraViewControllerDelegate: class {
     func shot(anAwesome image: UIImage)
 }
 
-public class SVNCameraViewController: UIViewController, AVCapturePhotoCaptureDelegate{
-
-    lazy var theme = SVNTheme_DefaultDark()
+public class SVNCameraViewController: SVNModalViewController, AVCapturePhotoCaptureDelegate {
     
     public weak var delegate: SVNCameraViewControllerDelegate!
     
-    private lazy var dismissButton: UIButton = {
-        let button = UIButton()
-        button.addTarget(self, action: #selector(shouldDismiss), for: .touchUpInside)
-        self.view.addSubview(button)
-        return button
-    }()
     
     private lazy var actionbutton: UIButton = {
         let button = UIButton()
@@ -80,17 +73,6 @@ public class SVNCameraViewController: UIViewController, AVCapturePhotoCaptureDel
     
     private var declineShape: SVNShapeMetaData!
     
-    private lazy var dismissShape: SVNShapeMetaData = {
-        let shape = SVNShapeMetaData(shapes: nil,
-                                     location: .topLeft,
-                                     padding: CGPoint(x: 25.0, y: 50.0),
-                                     size: CGSize(width: 65.0, height: 65.0),
-                                     fill: UIColor.clear.cgColor,
-                                     stroke: self.theme.stanardButtonTintColor.cgColor,
-                                     strokeWidth: 2.5)
-        return shape
-    }()
-    
     //MARK: AV ivars
     private var captureSession: AVCaptureSession?
     
@@ -102,17 +84,28 @@ public class SVNCameraViewController: UIViewController, AVCapturePhotoCaptureDel
     
     private var awesomeImage: UIImage?
     
+    public init(theme: SVNTheme, delegate: SVNCameraViewControllerDelegate){
+        super.init(nibName: nil, bundle: nil)
+        self.delegate = delegate
+        self.theme = theme
+    }
+    
+    public init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?, theme: SVNTheme, delegate: SVNCameraViewControllerDelegate) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        self.delegate = delegate
+        self.theme = theme
+    }
+    
+    required public init?(coder aDecoder: NSCoder) {
+        fatalError("init with coder not currently supported")
+    }
     
     override public func viewDidLoad() {
         super.viewDidLoad()
         self.setInitalLayout()
         //Set things that should only happen once
-        
         self.view.backgroundColor = UIColor.black
         self.actionbutton.frame = self.shapeManager.fetchRect(with: leftCircle)
-        self.dismissButton.frame = self.shapeManager.fetchRect(for: .topLeft, with: CGPoint(x: 15, y: 15), and: CGSize(width: 75, height: 75))
-        self.dismissShape.shapes = self.shapeManager.createTwoLines(with: self.dismissShape, shapeToCreate: .exit)
-        self.dismissShape.shapes?.forEach({ self.view.layer.addSublayer($0) })
     }
     
     private func setInitalLayout(){
@@ -185,7 +178,7 @@ public class SVNCameraViewController: UIViewController, AVCapturePhotoCaptureDel
                                                 fill: UIColor.clear.cgColor,
                                                 stroke: self.theme.acceptButtonTintColor.cgColor,
                                                 strokeWidth: 2.5)
-            self.acceptShape?.shapes = self.shapeManager.createCheckMark(with: self.acceptShape)
+            self.acceptShape?.shapes = [self.shapeManager.createCheckMark(with: self.acceptShape)]
             self.acceptShape.shapes?.forEach({ self.acceptButton.layer.addSublayer($0) })
             self.acceptButton.isEnabled = true
         }
@@ -224,11 +217,7 @@ public class SVNCameraViewController: UIViewController, AVCapturePhotoCaptureDel
     internal func decline(){
         self.refreshView()
     }
-    
-    internal func shouldDismiss(){
-        self.dismiss(animated: true, completion: nil)
-    }
-    
+
     //MARK: AV Methods
     private func initilizeCaptureSession(){
         self.captureSession = AVCaptureSession()
