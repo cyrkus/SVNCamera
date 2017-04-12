@@ -5,7 +5,7 @@ SVNModalViewController
 
 #To Use this framework
 Instantiate SVNViewController with init(:theme, :delegate) or init(nibName: bundleName: theme: delegate:)
-You can pass in your own SVNTheme or an instance of SVNTheme_default ...
+You can pass in your own SVNTheme instance or nil
 
 If you haven't added camera access request to your info.plist:
   Add

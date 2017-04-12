@@ -84,16 +84,16 @@ public class SVNCameraViewController: SVNModalViewController, AVCapturePhotoCapt
     
     private var awesomeImage: UIImage?
     
-    public init(theme: SVNTheme, delegate: SVNCameraViewControllerDelegate){
+    public init(theme: SVNTheme?, delegate: SVNCameraViewControllerDelegate){
         super.init(nibName: nil, bundle: nil)
         self.delegate = delegate
-        self.theme = theme
+        self.theme = theme == nil ? SVNTheme_DefaultDark() : theme!
     }
     
-    public init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?, theme: SVNTheme, delegate: SVNCameraViewControllerDelegate) {
+    public init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?, theme: SVNTheme?, delegate: SVNCameraViewControllerDelegate) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         self.delegate = delegate
-        self.theme = theme
+        self.theme = theme == nil ? SVNTheme_DefaultDark() : theme!
     }
     
     required public init?(coder aDecoder: NSCoder) {
