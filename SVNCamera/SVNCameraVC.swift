@@ -12,14 +12,8 @@ import SVNTheme
 import SVNModalViewController
 import AVFoundation
 
-public protocol SVNCameraViewControllerDelegate: class {
-    func shot(anAwesome image: UIImage)
-}
 
 public class SVNCameraViewController: SVNModalViewController, AVCapturePhotoCaptureDelegate {
-    
-    public weak var delegate: SVNCameraViewControllerDelegate!
-    
     
     private lazy var actionbutton: UIButton = {
         let button = UIButton()
@@ -84,15 +78,15 @@ public class SVNCameraViewController: SVNModalViewController, AVCapturePhotoCapt
     
     private var awesomeImage: UIImage?
     
-    public init(theme: SVNTheme?, delegate: SVNCameraViewControllerDelegate){
+    public var shotAnAwesomeImage: ((UIImage) -> Void)!
+    
+    public init(theme: SVNTheme?){
         super.init(nibName: nil, bundle: nil)
-        self.delegate = delegate
         self.theme = theme == nil ? SVNTheme_DefaultDark() : theme!
     }
     
-    public init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?, theme: SVNTheme?, delegate: SVNCameraViewControllerDelegate) {
+    public init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?, theme: SVNTheme?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        self.delegate = delegate
         self.theme = theme == nil ? SVNTheme_DefaultDark() : theme!
     }
     
@@ -210,7 +204,7 @@ public class SVNCameraViewController: SVNModalViewController, AVCapturePhotoCapt
     
     internal func accept(){
         guard let image = awesomeImage else { return }
-        self.delegate.shot(anAwesome: image)
+        self.shotAnAwesomeImage(image)
         self.shouldDismiss()
     }
     
