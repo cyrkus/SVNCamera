@@ -7,17 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A10AE9091EA0481D00670C9A /* SVNModalViewController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A10AE9061EA0481D00670C9A /* SVNModalViewController.framework */; };
-		A10AE90A1EA0481D00670C9A /* SVNShapesManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A10AE9071EA0481D00670C9A /* SVNShapesManager.framework */; };
-		A10AE90B1EA0481D00670C9A /* SVNTheme.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A10AE9081EA0481D00670C9A /* SVNTheme.framework */; };
 		A16C67EC1E96CF8500846BAF /* SVNCamera.h in Headers */ = {isa = PBXBuildFile; fileRef = A16C67EA1E96CF8500846BAF /* SVNCamera.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A16C67F71E96D05000846BAF /* SVNCameraVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A16C67F61E96D05000846BAF /* SVNCameraVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		A10AE9061EA0481D00670C9A /* SVNModalViewController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SVNModalViewController.framework; path = Carthage/Build/iOS/SVNModalViewController.framework; sourceTree = "<group>"; };
-		A10AE9071EA0481D00670C9A /* SVNShapesManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SVNShapesManager.framework; path = Carthage/Build/iOS/SVNShapesManager.framework; sourceTree = "<group>"; };
-		A10AE9081EA0481D00670C9A /* SVNTheme.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SVNTheme.framework; path = Carthage/Build/iOS/SVNTheme.framework; sourceTree = "<group>"; };
 		A16C67E71E96CF8500846BAF /* SVNCamera.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SVNCamera.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A16C67EA1E96CF8500846BAF /* SVNCamera.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SVNCamera.h; sourceTree = "<group>"; };
 		A16C67EB1E96CF8500846BAF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -29,9 +23,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A10AE9091EA0481D00670C9A /* SVNModalViewController.framework in Frameworks */,
-				A10AE90A1EA0481D00670C9A /* SVNShapesManager.framework in Frameworks */,
-				A10AE90B1EA0481D00670C9A /* SVNTheme.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -69,9 +60,6 @@
 		A16C67F21E96D00400846BAF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				A10AE9061EA0481D00670C9A /* SVNModalViewController.framework */,
-				A10AE9071EA0481D00670C9A /* SVNShapesManager.framework */,
-				A10AE9081EA0481D00670C9A /* SVNTheme.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -168,7 +156,7 @@
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/bash;
+			shellPath = /bin/sh;
 			shellScript = "/usr/local/bin/carthage copy-frameworks";
 		};
 /* End PBXShellScriptBuildPhase section */
