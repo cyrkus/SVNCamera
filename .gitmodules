@@ -1,0 +1,9 @@
+[submodule "Carthage/Checkouts/SVNShapesManager"]
+	path = Carthage/Checkouts/SVNShapesManager
+	url = https://github.com/sevenapps/SVNShapesManager.git
+[submodule "Carthage/Checkouts/SVNTheme"]
+	path = Carthage/Checkouts/SVNTheme
+	url = https://github.com/sevenapps/SVNTheme.git
+[submodule "Carthage/Checkouts/SVNModalViewController"]
+	path = Carthage/Checkouts/SVNModalViewController
+	url = https://github.com/sevenapps/SVNModalViewController.git
