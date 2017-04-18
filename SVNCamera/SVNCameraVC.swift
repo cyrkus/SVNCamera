@@ -78,7 +78,10 @@ public class SVNCameraViewController: SVNModalViewController, AVCapturePhotoCapt
     
     private var awesomeImage: UIImage?
     
+    //MARK: Coordinator Delegates
     public var shotAnAwesomeImage: ((UIImage) -> Void)!
+    
+    public var stop: (() -> Void)!
     
     public init(theme: SVNTheme?){
         super.init(nibName: nil, bundle: nil)
@@ -100,7 +103,6 @@ public class SVNCameraViewController: SVNModalViewController, AVCapturePhotoCapt
         //Set things that should only happen once
         self.view.backgroundColor = UIColor.black
         self.actionbutton.frame = self.shapeManager.fetchRect(with: leftCircle)
-        self.addModalSubviews()
     }
     
     private func setInitalLayout(){
@@ -142,12 +144,16 @@ public class SVNCameraViewController: SVNModalViewController, AVCapturePhotoCapt
     }
     
     //MARK: Actions
+    public override func shouldDismiss() {
+        self.stop()
+    }
+    
     internal func tapAction(){
         self.shootPhoto()
         self.animateShapesForPhoto()
     }
     
-    func animateShapesForPhoto(){
+    private func animateShapesForPhoto(){
         self.shapeManager.animateToOval(with: leftCircle, in: 0.5, withNewLocation: .botLeft) {
             let rect = self.shapeManager.fetchRect(for: .botLeft, with: self.leftCircle.padding, and: self.leftCircle.size)
             self.declineShape = SVNShapeMetaData(shapes: nil,
@@ -159,7 +165,7 @@ public class SVNCameraViewController: SVNModalViewController, AVCapturePhotoCapt
                                                  strokeWidth: 2.0)
             self.declineButton.frame = rect
             self.declineShape.shapes = self.shapeManager.createTwoLines(with: self.declineShape, shapeToCreate: .exit)
-            self.declineShape.shapes?.forEach({ self.declineButton.layer.addSublayer($0) })
+            self.declineShape.shapes?.forEach({ self.view.layer.addSublayer($0) })
             self.declineButton.isEnabled = true
         }
         
@@ -179,7 +185,7 @@ public class SVNCameraViewController: SVNModalViewController, AVCapturePhotoCapt
         }
     }
     
-    func shootPhoto(){
+    private func shootPhoto(){
         if stillImageView != nil {
             stillImageView?.removeFromSuperview()
             stillImageView = nil
@@ -206,13 +212,12 @@ public class SVNCameraViewController: SVNModalViewController, AVCapturePhotoCapt
     internal func accept(){
         guard let image = awesomeImage else { return }
         self.shotAnAwesomeImage(image)
-        self.shouldDismiss()
     }
     
     internal func decline(){
         self.refreshView()
     }
-
+    
     //MARK: AV Methods
     private func initilizeCaptureSession(){
         self.captureSession = AVCaptureSession()
@@ -241,6 +246,7 @@ public class SVNCameraViewController: SVNModalViewController, AVCapturePhotoCapt
             }
         }
     }
+    
     public func capture(_ captureOutput: AVCapturePhotoOutput, didFinishProcessingPhotoSampleBuffer photoSampleBuffer: CMSampleBuffer?, previewPhotoSampleBuffer: CMSampleBuffer?, resolvedSettings: AVCaptureResolvedPhotoSettings, bracketSettings: AVCaptureBracketedStillImageSettings?, error: Error?) {
         
         if let error = error {
