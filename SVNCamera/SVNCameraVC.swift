@@ -103,6 +103,7 @@ public class SVNCameraViewController: SVNModalViewController, AVCapturePhotoCapt
         //Set things that should only happen once
         self.view.backgroundColor = UIColor.black
         self.actionbutton.frame = self.shapeManager.fetchRect(with: leftCircle)
+        self.addModalSubviews()
     }
     
     private func setInitalLayout(){
