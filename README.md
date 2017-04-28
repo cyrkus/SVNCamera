@@ -9,6 +9,7 @@ A generic camera ViewController intended for the SVNAppBuilder project.
 Submodules include:
 [SVNModalViewController](https://github.com/sevenapps/SVNShapesManager)
 [SVNShapesManager](https://github.com/sevenapps/SVNModalViewController)
+[SVNTheme](https://github.com/sevenapps/SVNTheme)
 
 To retrieve the captured image equate a method in the presenting class to
 
