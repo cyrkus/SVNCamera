@@ -1,7 +1,17 @@
 # SVNCamera
 A generic camera ViewController intended for the SVNAppBuilder project.
+<p align="center">
+  <img src="/images/Camera.png" alt="SVNCamera"/>
+</p>
+
 Submodules include:
-SVNModalViewController
+[SVNModalViewController](https://github.com/sevenapps/SVNShapesManager)
+[SVNShapesManager](https://github.com/sevenapps/SVNModalViewController)
+
+To retrieve the captured image equate a method in the presenting class to
+
+    public var shotAnAwesomeImage: ((UIImage) -> Void)!
+
 
 #To Use this framework
 Instantiate SVNViewController with init(:theme, :delegate) or init(nibName: bundleName: theme: delegate:)
