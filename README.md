@@ -1,7 +1,7 @@
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
 # SVNCamera
-A generic camera ViewController intended for the SVNAppBuilder project.
+A modal custom Camera ViewController with a selection animation.
 <p align="center">
   <img src="/images/Camera.png" alt="SVNCamera"/>
 </p>
