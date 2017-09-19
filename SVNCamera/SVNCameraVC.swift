@@ -149,7 +149,7 @@ public class SVNCameraViewController: SVNModalViewController, AVCapturePhotoCapt
         self.stop()
     }
     
-    internal func tapAction(){
+    @objc internal func tapAction(){
         self.shootPhoto()
         self.animateShapesForPhoto()
     }
@@ -199,7 +199,7 @@ public class SVNCameraViewController: SVNModalViewController, AVCapturePhotoCapt
         }
         //Is in circle state and we should shoot an image
         let settings = AVCapturePhotoSettings()
-        let previewPixelType = settings.availablePreviewPhotoPixelFormatTypes.first!
+        let previewPixelType = settings.__availablePreviewPhotoPixelFormatTypes.first!
         let previewFormat = [
             kCVPixelBufferPixelFormatTypeKey as String: previewPixelType,
             kCVPixelBufferWidthKey as String: 160,
@@ -210,22 +210,22 @@ public class SVNCameraViewController: SVNModalViewController, AVCapturePhotoCapt
     }
     
     
-    internal func accept(){
+    @objc internal func accept(){
         guard let image = awesomeImage else { return }
         self.shotAnAwesomeImage(image)
     }
     
-    internal func decline(){
+    @objc internal func decline(){
         self.refreshView()
     }
     
     //MARK: AV Methods
     private func initilizeCaptureSession(){
         self.captureSession = AVCaptureSession()
-        self.captureSession!.sessionPreset = AVCaptureSessionPresetPhoto
+        self.captureSession!.sessionPreset = AVCaptureSession.Preset.photo
         self.stillImageOutput = AVCapturePhotoOutput()
         
-        guard let device = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo) else {
+        guard let device = AVCaptureDevice.default(for: AVMediaType.video) else {
             fatalError("Device doesn't have a camera")
         }
         //Flush the preview layer
@@ -235,20 +235,20 @@ public class SVNCameraViewController: SVNModalViewController, AVCapturePhotoCapt
         }
         
         let input = try? AVCaptureDeviceInput(device: device)
-        if (self.captureSession!.canAddInput(input)) {
-            self.captureSession!.addInput(input)
-            if (self.captureSession!.canAddOutput(stillImageOutput)) {
-                self.captureSession!.addOutput(stillImageOutput)
-                self.previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
+        if (self.captureSession!.canAddInput(input!)) {
+            self.captureSession!.addInput(input!)
+            if (self.captureSession!.canAddOutput(stillImageOutput!)) {
+                self.captureSession!.addOutput(stillImageOutput!)
+                self.previewLayer = AVCaptureVideoPreviewLayer(session: captureSession!)
                 self.previewLayer!.frame = self.view.bounds
-                self.previewLayer!.videoGravity = AVLayerVideoGravityResizeAspectFill
+                self.previewLayer!.videoGravity = AVLayerVideoGravity.resizeAspectFill
                 self.view.layer.insertSublayer(previewLayer!, at: 0)
                 captureSession?.startRunning()
             }
         }
     }
     
-    public func capture(_ captureOutput: AVCapturePhotoOutput, didFinishProcessingPhotoSampleBuffer photoSampleBuffer: CMSampleBuffer?, previewPhotoSampleBuffer: CMSampleBuffer?, resolvedSettings: AVCaptureResolvedPhotoSettings, bracketSettings: AVCaptureBracketedStillImageSettings?, error: Error?) {
+  public func photoOutput(_ captureOutput: AVCapturePhotoOutput, didFinishProcessingPhoto photoSampleBuffer: CMSampleBuffer?, previewPhoto previewPhotoSampleBuffer: CMSampleBuffer?, resolvedSettings: AVCaptureResolvedPhotoSettings, bracketSettings: AVCaptureBracketedStillImageSettings?, error: Error?) {
         
         if let error = error {
             print("error capturing image : \(error.localizedDescription)")
